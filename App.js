@@ -33,7 +33,6 @@ const shadow = {
   },
   shadowOpacity: 0.3,
   shadowRadius: 5,
-
   elevation: 8,
 };
 

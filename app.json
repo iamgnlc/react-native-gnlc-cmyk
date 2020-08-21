@@ -16,7 +16,13 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "requireFullScreen": true
+      "requireFullScreen": true,
+      "bundleIdentifier": "me.gnlc.cmyk",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "me.gnlc.cmyk",
+      "versionCode": 1
     }
   }
 }
