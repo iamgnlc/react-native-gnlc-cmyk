@@ -5,13 +5,12 @@ import {
   Easing,
   processColor,
   StatusBar,
-  StyleSheet,
   TouchableHighlight,
 } from "react-native";
 import RNShake from "react-native-shake";
 
-import Platform from "./Platform";
-import { Container, Row, Letter } from "./Styles";
+import Platform from "./utils/Platform";
+import { Container, Row, Letter } from "./styles/Styles";
 
 import G from "./assets/G";
 import N from "./assets/N";
@@ -80,7 +79,7 @@ class App extends React.Component {
     };
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.setState({
       orientation: Platform.isPortrait() ? "portrait" : "landscape",
       deviceType: Platform.isTablet() ? "tablet" : "phone",
@@ -124,6 +123,7 @@ class App extends React.Component {
                 : 1,
             duration: this.duration,
             easing: this.easing,
+            useNativeDriver: false,
           }).start();
         });
       }
@@ -140,8 +140,8 @@ class App extends React.Component {
             <Animated.View
               style={{
                 flex: this.state.tapped[key],
-                ...shadow,
                 zIndex: this.flexSize - i,
+                ...shadow,
               }}
               key={key}
             >
