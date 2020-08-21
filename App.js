@@ -25,6 +25,18 @@ const colors = {
   yellow: "#FAEA26",
 };
 
+const shadow = {
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 3,
+    height: 3,
+  },
+  shadowOpacity: 0.3,
+  shadowRadius: 5,
+
+  elevation: 8,
+};
+
 const Rows = {
   g: {
     component: <G as={Letter} color={processColor(colors.black)} />,
@@ -129,6 +141,8 @@ class App extends React.Component {
             <Animated.View
               style={{
                 flex: this.state.tapped[key],
+                ...shadow,
+                zIndex: this.flexSize - i,
               }}
               key={key}
             >
@@ -137,7 +151,6 @@ class App extends React.Component {
                 {
                   backgroundColor: Rows[key].backgroundColor,
                   orientation: orientation,
-                  zIndex: i * 10,
                 },
                 <TouchableHighlight
                   underlayColor={Rows[key].backgroundColor}

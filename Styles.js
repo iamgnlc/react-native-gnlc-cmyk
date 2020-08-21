@@ -18,7 +18,6 @@ export const Row = styled.View`
   align-items: ${(props) =>
     props.orientation === "landscape" ? "center" : "stretch"};
   justify-content: center;
-  z-index: ${(props) => props.zIndex};
 `;
 
 export const Letter = styled.View``;
