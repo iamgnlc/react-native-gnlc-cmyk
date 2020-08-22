@@ -42,7 +42,8 @@ const Rows = {
 class App extends React.Component {
   containerFlexSize = 4;
   rowFlexSize = this.containerFlexSize / 4;
-  duration = 500;
+  fadeDuration = 1500;
+  animationDuration = 500;
   easing = Easing.elastic(1);
 
   state = {
@@ -110,7 +111,7 @@ class App extends React.Component {
                 : lastTapped
                 ? this.getProportions().closed
                 : this.rowFlexSize,
-            duration: this.duration,
+            animation: this.animationDuration,
             easing: this.easing,
             useNativeDriver: false,
           }).start();
@@ -128,7 +129,7 @@ class App extends React.Component {
         <Container
           orientation={orientation}
           flex={this.containerFlexSize}
-          duration={1500}
+          duration={this.fadeDuration}
         >
           {Object.keys(Rows).map((key, i) => {
             return (
