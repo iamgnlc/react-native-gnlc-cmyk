@@ -22,4 +22,6 @@ const SvgComponent = (props) => {
   );
 };
 
+SvgComponent.displayName = "C";
+
 export default React.memo(SvgComponent);

@@ -22,4 +22,6 @@ const SvgComponent = (props) => {
   );
 };
 
+SvgComponent.displayName = "N";
+
 export default React.memo(SvgComponent);

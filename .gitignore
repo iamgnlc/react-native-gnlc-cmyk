@@ -1,1 +1,6 @@
+.DS_Store
+.expo
+.vscode
 node_modules
+
+yarn-error.log

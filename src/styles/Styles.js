@@ -1,5 +1,23 @@
 import styled from "styled-components/native";
 
+export const colors = {
+  black: "#010202",
+  cyan: "#29AAE2",
+  magenta: "#E32185",
+  yellow: "#FAEA26",
+};
+
+export const shadow = {
+  shadowColor: "#000",
+  shadowOffset: {
+    width: 3,
+    height: 3,
+  },
+  shadowOpacity: 0.3,
+  shadowRadius: 5,
+  elevation: 8,
+};
+
 export const Container = styled.View`
   background-color: #000;
   display: flex;
