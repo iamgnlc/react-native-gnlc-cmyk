@@ -16,8 +16,8 @@ import G from "./assets/G";
 import N from "./assets/N";
 import L from "./assets/L";
 import C from "./assets/C";
-import GradientMask from "./assets/GradientMask";
 
+import GradientMask from "./GradientMask";
 import Container from "./Container";
 
 const Rows = {

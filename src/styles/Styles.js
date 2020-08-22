@@ -20,6 +20,15 @@ export const shadow = {
   elevation: 8,
 };
 
+export const GradientWrapper = styled.View`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+`;
+
 export const Container = styled(Animated.View)`
   background-color: transparent;
   display: flex;
@@ -28,7 +37,7 @@ export const Container = styled(Animated.View)`
     props.orientation === "landscape" ? "row" : "column"};
   align-items: stretch;
   justify-content: center;
-  z-index: 0;
+  z-index: 1;
 `;
 
 export const Row = styled.View`
