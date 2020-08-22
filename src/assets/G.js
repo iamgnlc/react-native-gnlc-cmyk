@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 
@@ -21,5 +22,9 @@ const SvgComponent = (props) => {
 };
 
 SvgComponent.displayName = 'G';
+
+SvgComponent.propTypes = {
+  color: PropTypes.number,
+};
 
 export default React.memo(SvgComponent);
