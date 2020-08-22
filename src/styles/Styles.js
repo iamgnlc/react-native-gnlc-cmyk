@@ -1,5 +1,7 @@
 import styled from "styled-components/native";
 
+import { Animated } from "react-native";
+
 export const colors = {
   black: "#010202",
   cyan: "#29AAE2",
@@ -18,8 +20,8 @@ export const shadow = {
   elevation: 8,
 };
 
-export const Container = styled.View`
-  background-color: #000;
+export const Container = styled(Animated.View)`
+  background-color: transparent;
   display: flex;
   flex: ${(props) => props.flex};
   flex-direction: ${(props) =>
