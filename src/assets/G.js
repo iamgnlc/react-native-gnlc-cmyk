@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View } from "react-native";
-import Svg, { Path } from "react-native-svg";
+import * as React from 'react';
+import { View } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
 
 const SvgComponent = (props) => {
   return (
@@ -20,6 +20,6 @@ const SvgComponent = (props) => {
   );
 };
 
-SvgComponent.displayName = "G";
+SvgComponent.displayName = 'G';
 
 export default React.memo(SvgComponent);

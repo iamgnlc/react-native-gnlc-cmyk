@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from "react";
-import { Animated } from "react-native";
+import React, { useRef, useEffect } from 'react';
+import { Animated } from 'react-native';
 
-import { Container as StyledContainer } from "./styles/Styles";
+import { Container as StyledContainer } from './styles/Styles';
 
 const Container = (props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -27,6 +27,6 @@ const Container = (props) => {
   );
 };
 
-Container.displayName = "Container";
+Container.displayName = 'Container';
 
 export default React.memo(Container);

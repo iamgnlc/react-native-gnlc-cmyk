@@ -1,16 +1,16 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
-import { Animated } from "react-native";
+import { Animated } from 'react-native';
 
 export const colors = {
-  black: "#010202",
-  cyan: "#29AAE2",
-  magenta: "#E32185",
-  yellow: "#FAEA26",
+  black: '#010202',
+  cyan: '#29AAE2',
+  magenta: '#E32185',
+  yellow: '#FAEA26',
 };
 
 export const shadow = {
-  shadowColor: "#000",
+  shadowColor: '#000',
   shadowOffset: {
     width: 3,
     height: 3,
@@ -34,7 +34,7 @@ export const Container = styled(Animated.View)`
   display: flex;
   flex: ${(props) => props.flex};
   flex-direction: ${(props) =>
-    props.orientation === "landscape" ? "row" : "column"};
+    props.orientation === 'landscape' ? 'row' : 'column'};
   align-items: stretch;
   justify-content: center;
   z-index: 1;
@@ -45,7 +45,7 @@ export const Row = styled.View`
   flex: 1;
   overflow: hidden;
   align-items: ${(props) =>
-    props.orientation === "landscape" ? "center" : "stretch"};
+    props.orientation === 'landscape' ? 'center' : 'stretch'};
   justify-content: center;
 `;
 

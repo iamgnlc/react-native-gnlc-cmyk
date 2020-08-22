@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Animated,
   Dimensions,
@@ -6,19 +6,18 @@ import {
   processColor,
   StatusBar,
   TouchableHighlight,
-} from "react-native";
-import RNShake from "react-native-shake";
+} from 'react-native';
 
-import Platform from "./utils/Platform";
-import { colors, shadow, Row, Letter } from "./styles/Styles";
+import Platform from './utils/Platform';
+import { colors, shadow, Row, Letter } from './styles/Styles';
 
-import G from "./assets/G";
-import N from "./assets/N";
-import L from "./assets/L";
-import C from "./assets/C";
+import G from './assets/G';
+import N from './assets/N';
+import L from './assets/L';
+import C from './assets/C';
 
-import GradientMask from "./GradientMask";
-import Container from "./Container";
+import GradientMask from './GradientMask';
+import Container from './Container';
 
 const Rows = {
   g: {
@@ -58,41 +57,41 @@ class App extends React.Component {
     },
   };
 
+  init = () => {
+    this.setState({
+      orientation: Platform.isPortrait() ? 'portrait' : 'landscape',
+      deviceType: Platform.isTablet() ? 'tablet' : 'phone',
+    });
+  };
+
+  reset = () => {
+    this.handleRowTouch(null);
+  };
+
   getProportions = () => {
     return {
       open:
         this.containerFlexSize *
-        (this.state.deviceType === "phone" ? 0.815 : 0.915),
+        (this.state.deviceType === 'phone' ? 0.815 : 0.915),
       closed:
         this.containerFlexSize *
-        (this.state.deviceType === "phone" ? 0.185 : 0.085),
+        (this.state.deviceType === 'phone' ? 0.185 : 0.085),
     };
   };
 
   componentDidMount() {
-    this.setState({
-      orientation: Platform.isPortrait() ? "portrait" : "landscape",
-      deviceType: Platform.isTablet() ? "tablet" : "phone",
-    });
-    RNShake.addEventListener("ShakeEvent", () => {
-      this.reset();
-    });
-    Dimensions.addEventListener("change", () => {
+    this.init();
+    Dimensions.addEventListener('change', () => {
       this.reset();
       this.setState({
-        orientation: Platform.isPortrait() ? "portrait" : "landscape",
+        orientation: Platform.isPortrait() ? 'portrait' : 'landscape',
       });
     });
   }
 
   componentWillUnmount() {
-    RNShake.removeEventListener("ShakeEvent");
-    Dimensions.removeEventListener("change");
+    Dimensions.removeEventListener('change');
   }
-
-  reset = () => {
-    this.handleRowTouch(null);
-  };
 
   handleRowTouch = (tapped) => {
     this.setState(
@@ -116,7 +115,7 @@ class App extends React.Component {
             useNativeDriver: false,
           }).start();
         });
-      }
+      },
     );
   };
 
@@ -152,7 +151,7 @@ class App extends React.Component {
                     onPress={() => this.handleRowTouch(key)}
                   >
                     {Rows[key].component}
-                  </TouchableHighlight>
+                  </TouchableHighlight>,
                 )}
               </Animated.View>
             );
