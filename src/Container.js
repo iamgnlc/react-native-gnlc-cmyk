@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
+import PropTypes from 'prop-types';
 
 import { Container as StyledContainer } from './styles/Styles';
 
@@ -16,7 +17,7 @@ const Container = (props) => {
 
   return (
     <StyledContainer
-      orientation={props.orientation}
+      orientation={props.orientation || 'row'}
       flex={props.flex}
       style={{
         opacity: fadeAnim,
@@ -28,5 +29,9 @@ const Container = (props) => {
 };
 
 Container.displayName = 'Container';
+
+Container.propTypes = {
+  orientation: PropTypes.string,
+};
 
 export default React.memo(Container);

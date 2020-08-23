@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-
+import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 
 export const colors = {
@@ -44,6 +44,11 @@ export const Container = styled(Animated.View)`
   z-index: 1;
 `;
 
+Container.propTypes = {
+  flex: PropTypes.number,
+  orientation: PropTypes.string,
+};
+
 export const Row = styled.View`
   background-color: ${(props) => props.backgroundColor};
   flex: 1;
@@ -52,5 +57,10 @@ export const Row = styled.View`
     props.orientation === 'landscape' ? 'center' : 'stretch'};
   justify-content: center;
 `;
+
+Row.propTypes = {
+  backgroundColor: PropTypes.string,
+  orientation: PropTypes.string,
+};
 
 export const Letter = styled.View``;

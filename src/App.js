@@ -124,7 +124,14 @@ class App extends React.Component {
     return (
       <React.Fragment>
         <StatusBar hidden />
-        <GradientMask />
+        <GradientMask
+          steps={[
+            { color: colors.cyan, offset: 12.5 },
+            { color: colors.magenta, offset: 37.5 },
+            { color: colors.yellow, offset: 62.5 },
+            { color: colors.black, offset: 87.5 },
+          ]}
+        />
         <Container
           orientation={orientation}
           flex={this.containerFlexSize}
