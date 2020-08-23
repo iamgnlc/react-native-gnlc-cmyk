@@ -119,50 +119,59 @@ class App extends React.Component {
     );
   };
 
-  render() {
+  renderGradient = () => (
+    <GradientMask
+      steps={[
+        { color: colors.cyan, offset: 12.5 },
+        { color: colors.magenta, offset: 37.5 },
+        { color: colors.yellow, offset: 62.5 },
+        { color: colors.black, offset: 87.5 },
+      ]}
+    />
+  );
+
+  renderRows = () => {
     const { orientation, tapped } = this.state;
+    return Object.keys(Rows).map((key, i) => {
+      return (
+        <Animated.View
+          style={{
+            flex: tapped[key],
+            zIndex: this.containerFlexSize - i,
+            ...shadow,
+          }}
+          key={key}
+        >
+          {React.createElement(
+            Row,
+            {
+              backgroundColor: Rows[key].backgroundColor,
+              orientation: orientation,
+            },
+            <TouchableHighlight
+              underlayColor={Rows[key].backgroundColor}
+              onPress={() => this.handleRowTouch(key)}
+            >
+              {Rows[key].component}
+            </TouchableHighlight>,
+          )}
+        </Animated.View>
+      );
+    });
+  };
+
+  render() {
+    const { orientation } = this.state;
     return (
       <React.Fragment>
         <StatusBar hidden />
-        <GradientMask
-          steps={[
-            { color: colors.cyan, offset: 12.5 },
-            { color: colors.magenta, offset: 37.5 },
-            { color: colors.yellow, offset: 62.5 },
-            { color: colors.black, offset: 87.5 },
-          ]}
-        />
+        {this.renderGradient()}
         <Container
           orientation={orientation}
           flex={this.containerFlexSize}
           duration={this.fadeDuration}
         >
-          {Object.keys(Rows).map((key, i) => {
-            return (
-              <Animated.View
-                style={{
-                  flex: tapped[key],
-                  zIndex: this.containerFlexSize - i,
-                  ...shadow,
-                }}
-                key={key}
-              >
-                {React.createElement(
-                  Row,
-                  {
-                    backgroundColor: Rows[key].backgroundColor,
-                    orientation: orientation,
-                  },
-                  <TouchableHighlight
-                    underlayColor={Rows[key].backgroundColor}
-                    onPress={() => this.handleRowTouch(key)}
-                  >
-                    {Rows[key].component}
-                  </TouchableHighlight>,
-                )}
-              </Animated.View>
-            );
-          })}
+          {this.renderRows()}
         </Container>
       </React.Fragment>
     );
