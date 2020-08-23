@@ -1,5 +1,4 @@
 import styled from 'styled-components/native';
-import PropTypes from 'prop-types';
 
 import { Animated } from 'react-native';
 
@@ -30,6 +29,10 @@ export const GradientWrapper = styled.View`
   z-index: 0;
 `;
 
+export const SvgWrapper = styled.View`
+  aspect-ratio: 1;
+`;
+
 export const Container = styled(Animated.View)`
   background-color: transparent;
   display: flex;
@@ -41,11 +44,6 @@ export const Container = styled(Animated.View)`
   z-index: 1;
 `;
 
-Container.propTypes = {
-  orientation: PropTypes.string,
-  flex: PropTypes.number,
-};
-
 export const Row = styled.View`
   background-color: ${(props) => props.backgroundColor};
   flex: 1;
@@ -54,9 +52,5 @@ export const Row = styled.View`
     props.orientation === 'landscape' ? 'center' : 'stretch'};
   justify-content: center;
 `;
-
-Row.propTypes = {
-  orientation: PropTypes.string,
-};
 
 export const Letter = styled.View``;

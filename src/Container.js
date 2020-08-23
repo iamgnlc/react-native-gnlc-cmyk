@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 
 import { Container as StyledContainer } from './styles/Styles';
@@ -29,10 +28,5 @@ const Container = (props) => {
 };
 
 Container.displayName = 'Container';
-
-Container.propTypes = {
-  orientation: PropTypes.string,
-  flex: PropTypes.number,
-};
 
 export default React.memo(Container);
