@@ -146,6 +146,7 @@ class App extends React.Component {
             {
               backgroundColor: Rows[key].backgroundColor,
               orientation: orientation,
+              elevation: shadow.elevation,
             },
             <TouchableHighlight
               underlayColor={Rows[key].backgroundColor}
