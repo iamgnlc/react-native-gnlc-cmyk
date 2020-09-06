@@ -27,7 +27,7 @@ const SvgComponent = (props) => {
 SvgComponent.displayName = 'L';
 
 SvgComponent.propTypes = {
-  color: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
 };
 
 export default React.memo(SvgComponent);

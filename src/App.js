@@ -3,7 +3,6 @@ import {
   Animated,
   Dimensions,
   Easing,
-  processColor,
   StatusBar,
   TouchableHighlight,
 } from 'react-native';
@@ -16,24 +15,24 @@ import N from './assets/N';
 import L from './assets/L';
 import C from './assets/C';
 
-import GradientMask from './GradientMask';
-import Container from './Container';
+import GradientMask from './components/GradientMask';
+import Container from './components/Container';
 
 const Rows = {
   g: {
-    component: <G as={Letter} color={processColor(colors.black)} />,
+    component: <G as={Letter} color={colors.black} />,
     backgroundColor: colors.cyan,
   },
   n: {
-    component: <N as={Letter} color={processColor(colors.cyan)} />,
+    component: <N as={Letter} color={colors.cyan} />,
     backgroundColor: colors.magenta,
   },
   l: {
-    component: <L as={Letter} color={processColor(colors.magenta)} />,
+    component: <L as={Letter} color={colors.magenta} />,
     backgroundColor: colors.yellow,
   },
   c: {
-    component: <C as={Letter} color={processColor(colors.yellow)} />,
+    component: <C as={Letter} color={colors.yellow} />,
     backgroundColor: colors.black,
   },
 };

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Svg, Defs, LinearGradient, Stop, Rect } from 'react-native-svg';
 import PropTypes from 'prop-types';
 
-import { GradientWrapper } from './styles/Styles';
+import { GradientWrapper } from '../styles/Styles';
 
 const GradientMask = (props) => (
   <GradientWrapper>

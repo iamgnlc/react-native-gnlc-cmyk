@@ -17,7 +17,7 @@ export const shadow = {
   },
   shadowOpacity: 0.3,
   shadowRadius: 5,
-  elevation: 8,
+  elevation: 5,
 };
 
 export const GradientWrapper = styled.View`

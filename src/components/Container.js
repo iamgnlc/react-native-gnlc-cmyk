@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { Animated } from 'react-native';
 import PropTypes from 'prop-types';
 
-import { Container as StyledContainer } from './styles/Styles';
+import { Container as StyledContainer } from '../styles/Styles';
 
 const Container = (props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
