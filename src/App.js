@@ -2,11 +2,19 @@ import React from 'react';
 import {
   Animated,
   Dimensions,
-  Easing,
   StatusBar,
   TouchableHighlight,
 } from 'react-native';
 
+import {
+  containerFlexSize,
+  rowFlexSize,
+  fadeDuration,
+  animationDuration,
+  easing,
+} from './config';
+
+// import { ShakeEventExpo } from './utils/ShakeEventExpo';
 import Platform from './utils/Platform';
 import { colors, shadow, Row, Letter } from './styles/Styles';
 
@@ -38,21 +46,15 @@ const Rows = {
 };
 
 class App extends React.Component {
-  containerFlexSize = 4;
-  rowFlexSize = this.containerFlexSize / 4;
-  fadeDuration = 1500;
-  animationDuration = 500;
-  easing = Easing.elastic(1);
-
   state = {
     orientation: null,
     deviceType: null,
     lastTapped: null,
     tapped: {
-      g: new Animated.Value(this.rowFlexSize),
-      n: new Animated.Value(this.rowFlexSize),
-      l: new Animated.Value(this.rowFlexSize),
-      c: new Animated.Value(this.rowFlexSize),
+      g: new Animated.Value(rowFlexSize),
+      n: new Animated.Value(rowFlexSize),
+      l: new Animated.Value(rowFlexSize),
+      c: new Animated.Value(rowFlexSize),
     },
   };
 
@@ -64,17 +66,20 @@ class App extends React.Component {
   };
 
   reset = () => {
-    this.handleRowTouch(null);
+    this.setState(
+      {
+        orientation: Platform.isPortrait() ? 'portrait' : 'landscape',
+      },
+      this.handleRowTouch(),
+    );
   };
 
   getProportions = () => {
     return {
       open:
-        this.containerFlexSize *
-        (this.state.deviceType === 'phone' ? 0.815 : 0.915),
+        containerFlexSize * (this.state.deviceType === 'phone' ? 0.815 : 0.915),
       closed:
-        this.containerFlexSize *
-        (this.state.deviceType === 'phone' ? 0.185 : 0.085),
+        containerFlexSize * (this.state.deviceType === 'phone' ? 0.185 : 0.085),
     };
   };
 
@@ -82,9 +87,6 @@ class App extends React.Component {
     this.init();
     Dimensions.addEventListener('change', () => {
       this.reset();
-      this.setState({
-        orientation: Platform.isPortrait() ? 'portrait' : 'landscape',
-      });
     });
   }
 
@@ -92,7 +94,7 @@ class App extends React.Component {
     Dimensions.removeEventListener('change');
   }
 
-  handleRowTouch = (tapped) => {
+  handleRowTouch = (tapped = null) => {
     this.setState(
       (prevState) => {
         return {
@@ -108,9 +110,9 @@ class App extends React.Component {
                 ? this.getProportions().open
                 : lastTapped
                 ? this.getProportions().closed
-                : this.rowFlexSize,
-            animation: this.animationDuration,
-            easing: this.easing,
+                : rowFlexSize,
+            animation: animationDuration,
+            easing: easing,
             useNativeDriver: false,
           }).start();
         });
@@ -136,7 +138,7 @@ class App extends React.Component {
         <Animated.View
           style={{
             flex: tapped[key],
-            zIndex: this.containerFlexSize - i,
+            zIndex: containerFlexSize - i,
             ...shadow,
           }}
           key={key}
@@ -167,8 +169,8 @@ class App extends React.Component {
         {this.renderGradient()}
         <Container
           orientation={orientation}
-          flex={this.containerFlexSize}
-          duration={this.fadeDuration}
+          flex={containerFlexSize}
+          duration={fadeDuration}
         >
           {this.renderRows()}
         </Container>

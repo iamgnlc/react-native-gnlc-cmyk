@@ -10,6 +10,7 @@ export const colors = {
 };
 
 export const shadow = {
+  backgroundColor: 'white',
   shadowColor: '#000',
   shadowOffset: {
     width: 3,
@@ -17,7 +18,7 @@ export const shadow = {
   },
   shadowOpacity: 0.3,
   shadowRadius: 5,
-  elevation: 5,
+  elevation: 8,
 };
 
 export const GradientWrapper = styled.View`

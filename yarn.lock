@@ -3302,6 +3302,13 @@ expo-permissions@~9.0.1:
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-9.0.1.tgz#dc10b58654bbe39bbbed5827369942b01b08055e"
   integrity sha512-CosJgy8XQRN/OFG2JTQDcFxz3XTGi27coCMym/hVXWtQfk0z6PwdRG5IXHfLGuSckwIcgmirrwm2+Zc0X3MmNg==
 
+expo-sensors@~9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/expo-sensors/-/expo-sensors-9.0.1.tgz#dcaccf0c6b1d6db2283150439482315e41060778"
+  integrity sha512-dsMCehc9YVW+41AysFLsx5Ikyg/Dul13e+j5JiZnHLTbJucBR3UiBE+zh10KdhYG/qORZhBmYYt4OYOhvlxmbA==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-splash-screen@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/expo-splash-screen/-/expo-splash-screen-0.5.0.tgz#cad0eb77a3eade2c7101d169b8655e7ee8053c2f"
@@ -3831,7 +3838,7 @@ inquirer@^3.0.6:
     strip-ansi "^4.0.0"
     through "^2.3.6"
 
-invariant@^2.2.2, invariant@^2.2.4:
+invariant@^2.2.2, invariant@^2.2.4, invariant@^2.2.x:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
@@ -5346,6 +5353,13 @@ react-native-safe-area-context@~3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.0.7.tgz#0f53de7a30d626d82936000f3f6db374ecc4b800"
   integrity sha512-dqhRTlIFe5+P1yxitj0C9XVUxLqOmjomeqzUSSY8sNOWVjtIhEY/fl4ZKYpAVnktd8dt3zl13XmJTmRmy3d0uA==
+
+react-native-shake@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-shake/-/react-native-shake-3.4.0.tgz#3fa8f682651104b39c0b6c199bfa2ab10b36ce28"
+  integrity sha512-jOPrCC3VW/f8xYL6Yrv4XlSklVepMNF/ZdZ/5e0RzRPY+fexuNr0/Z1bQsPpaGjBd75Tk4WKpS/I/+Bj9oVXxg==
+  dependencies:
+    invariant "^2.2.x"
 
 react-native-svg@12.1.0:
   version "12.1.0"
