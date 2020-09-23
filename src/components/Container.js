@@ -32,6 +32,12 @@ Container.displayName = 'Container';
 
 Container.propTypes = {
   orientation: PropTypes.string,
+  duration: PropTypes.number,
+  flex: PropTypes.number.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
 };
 
 export default React.memo(Container);

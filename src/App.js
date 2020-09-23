@@ -133,6 +133,7 @@ class App extends React.Component {
 
   renderRows = () => {
     const { orientation, tapped } = this.state;
+
     return Object.keys(Rows).map((key, i) => {
       return (
         <Animated.View
@@ -164,6 +165,7 @@ class App extends React.Component {
 
   render() {
     const { orientation } = this.state;
+
     return (
       <React.Fragment>
         <StatusBar hidden />

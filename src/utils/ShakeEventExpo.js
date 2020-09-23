@@ -2,7 +2,7 @@
 
 import { Accelerometer } from 'expo-sensors';
 
-const THRESHOLD = 800;
+const THRESHOLD = 100;
 
 export class ShakeEventExpo {
   static addListener(handler) {
