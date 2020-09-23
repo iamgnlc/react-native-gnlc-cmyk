@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Alert,
   Animated,
   Dimensions,
   StatusBar,
@@ -83,6 +84,11 @@ class App extends React.Component {
     };
   };
 
+  about = () =>
+    Alert.alert('About', 'iamgnlc', [{ text: 'OK', onPress: () => {} }], {
+      cancelable: false,
+    });
+
   componentDidMount() {
     this.init();
     Dimensions.addEventListener('change', () => {
@@ -131,8 +137,27 @@ class App extends React.Component {
     />
   );
 
+  renderRow = (key) => {
+    const { orientation } = this.state;
+
+    return React.createElement(
+      Row,
+      {
+        backgroundColor: Rows[key].backgroundColor,
+        orientation: orientation,
+        elevation: shadow.elevation,
+      },
+      <TouchableHighlight
+        underlayColor={Rows[key].backgroundColor}
+        onPress={() => this.handleRowTouch(key)}
+      >
+        {Rows[key].component}
+      </TouchableHighlight>,
+    );
+  };
+
   renderRows = () => {
-    const { orientation, tapped } = this.state;
+    const { tapped } = this.state;
 
     return Object.keys(Rows).map((key, i) => {
       return (
@@ -144,20 +169,7 @@ class App extends React.Component {
           }}
           key={key}
         >
-          {React.createElement(
-            Row,
-            {
-              backgroundColor: Rows[key].backgroundColor,
-              orientation: orientation,
-              elevation: shadow.elevation,
-            },
-            <TouchableHighlight
-              underlayColor={Rows[key].backgroundColor}
-              onPress={() => this.handleRowTouch(key)}
-            >
-              {Rows[key].component}
-            </TouchableHighlight>,
-          )}
+          {this.renderRow(key)}
         </Animated.View>
       );
     });
