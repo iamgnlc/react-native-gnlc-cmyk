@@ -3,16 +3,18 @@ import {
   Alert,
   Animated,
   Dimensions,
+  Linking,
   StatusBar,
   TouchableHighlight,
 } from 'react-native';
 
 import {
-  containerFlexSize,
-  rowFlexSize,
-  fadeDuration,
-  animationDuration,
-  easing,
+  ANIMATION_DURATION,
+  CONTAINER_FLEX_SIZE,
+  EASE_TYPE,
+  FADE_DURATION,
+  GITHUB_PROFILE,
+  ROW_FLEX_SIZE,
 } from './config';
 
 // import { ShakeEventExpo } from './utils/ShakeEventExpo';
@@ -52,10 +54,10 @@ class App extends React.Component {
     deviceType: null,
     lastTapped: null,
     tapped: {
-      g: new Animated.Value(rowFlexSize),
-      n: new Animated.Value(rowFlexSize),
-      l: new Animated.Value(rowFlexSize),
-      c: new Animated.Value(rowFlexSize),
+      g: new Animated.Value(ROW_FLEX_SIZE),
+      n: new Animated.Value(ROW_FLEX_SIZE),
+      l: new Animated.Value(ROW_FLEX_SIZE),
+      c: new Animated.Value(ROW_FLEX_SIZE),
     },
   };
 
@@ -78,16 +80,33 @@ class App extends React.Component {
   getProportions = () => {
     return {
       open:
-        containerFlexSize * (this.state.deviceType === 'phone' ? 0.815 : 0.915),
+        CONTAINER_FLEX_SIZE *
+        (this.state.deviceType === 'phone' ? 0.815 : 0.915),
       closed:
-        containerFlexSize * (this.state.deviceType === 'phone' ? 0.185 : 0.085),
+        CONTAINER_FLEX_SIZE *
+        (this.state.deviceType === 'phone' ? 0.185 : 0.085),
     };
   };
 
   about = () =>
-    Alert.alert('About', 'iamgnlc', [{ text: 'OK', onPress: () => {} }], {
-      cancelable: false,
-    });
+    Alert.alert(
+      'About',
+      GITHUB_PROFILE,
+      [
+        {
+          text: 'OK',
+        },
+        {
+          text: 'Open',
+          onPress: () => {
+            Linking.openURL(GITHUB_PROFILE);
+          },
+        },
+      ],
+      {
+        cancelable: false,
+      },
+    );
 
   componentDidMount() {
     this.init();
@@ -116,9 +135,9 @@ class App extends React.Component {
                 ? this.getProportions().open
                 : lastTapped
                 ? this.getProportions().closed
-                : rowFlexSize,
-            animation: animationDuration,
-            easing: easing,
+                : ROW_FLEX_SIZE,
+            animation: ANIMATION_DURATION,
+            easing: EASE_TYPE,
             useNativeDriver: false,
           }).start();
         });
@@ -150,6 +169,8 @@ class App extends React.Component {
       <TouchableHighlight
         underlayColor={Rows[key].backgroundColor}
         onPress={() => this.handleRowTouch(key)}
+        onLongPress={this.about}
+        delayLongPress={1000}
       >
         {Rows[key].component}
       </TouchableHighlight>,
@@ -164,7 +185,7 @@ class App extends React.Component {
         <Animated.View
           style={{
             flex: tapped[key],
-            zIndex: containerFlexSize - i,
+            zIndex: CONTAINER_FLEX_SIZE - i,
             ...shadow,
           }}
           key={key}
@@ -184,8 +205,8 @@ class App extends React.Component {
         {this.renderGradient()}
         <Container
           orientation={orientation}
-          flex={containerFlexSize}
-          duration={fadeDuration}
+          flex={CONTAINER_FLEX_SIZE}
+          duration={FADE_DURATION}
         >
           {this.renderRows()}
         </Container>

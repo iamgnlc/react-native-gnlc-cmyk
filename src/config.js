@@ -1,7 +1,8 @@
 import { Easing } from 'react-native';
 
-export const containerFlexSize = 4;
-export const rowFlexSize = containerFlexSize / 4;
-export const fadeDuration = 1500;
-export const animationDuration = 500;
-export const easing = Easing.elastic(1);
+export const CONTAINER_FLEX_SIZE = 4;
+export const ROW_FLEX_SIZE = CONTAINER_FLEX_SIZE / 4;
+export const FADE_DURATION = 1500;
+export const ANIMATION_DURATION = 500;
+export const EASE_TYPE = Easing.elastic(1);
+export const GITHUB_PROFILE = 'https://github.com/iamgnlc';
