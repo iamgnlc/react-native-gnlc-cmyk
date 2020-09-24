@@ -2,6 +2,8 @@ import React from 'react';
 import {
   Alert,
   Animated,
+  Appearance,
+  AppState,
   Dimensions,
   Linking,
   StatusBar,
@@ -11,6 +13,7 @@ import {
 import {
   ANIMATION_DURATION,
   CONTAINER_FLEX_SIZE,
+  DELAY_LONG_PRESS,
   EASE_TYPE,
   FADE_DURATION,
   GITHUB_PROFILE,
@@ -18,8 +21,8 @@ import {
 } from './config';
 
 // import { ShakeEventExpo } from './utils/ShakeEventExpo';
-import Platform from './utils/Platform';
-import { colors, shadow, Row, Letter } from './styles/Styles';
+import Device from './utils/Device';
+import { colorSchemes, shadow, Row, Letter } from './styles/Styles';
 
 import G from './assets/G';
 import N from './assets/N';
@@ -29,30 +32,33 @@ import C from './assets/C';
 import GradientMask from './components/GradientMask';
 import Container from './components/Container';
 
-const Rows = {
-  g: {
-    component: <G as={Letter} color={colors.black} />,
-    backgroundColor: colors.cyan,
-  },
-  n: {
-    component: <N as={Letter} color={colors.cyan} />,
-    backgroundColor: colors.magenta,
-  },
-  l: {
-    component: <L as={Letter} color={colors.magenta} />,
-    backgroundColor: colors.yellow,
-  },
-  c: {
-    component: <C as={Letter} color={colors.yellow} />,
-    backgroundColor: colors.black,
-  },
-};
+// const Rows = {
+//   g: {
+//     component: <G as={Letter} color={colors.black} />,
+//     backgroundColor: colors.cyan,
+//   },
+//   n: {
+//     component: <N as={Letter} color={colors.cyan} />,
+//     backgroundColor: colors.magenta,
+//   },
+//   l: {
+//     component: <L as={Letter} color={colors.magenta} />,
+//     backgroundColor: colors.yellow,
+//   },
+//   c: {
+//     component: <C as={Letter} color={colors.yellow} />,
+//     backgroundColor: colors.black,
+//   },
+// };
 
 class App extends React.Component {
   state = {
     orientation: null,
     deviceType: null,
     lastTapped: null,
+    colorScheme: null,
+    isMounted: false,
+    appState: AppState.currentState,
     tapped: {
       g: new Animated.Value(ROW_FLEX_SIZE),
       n: new Animated.Value(ROW_FLEX_SIZE),
@@ -62,30 +68,25 @@ class App extends React.Component {
   };
 
   init = () => {
-    this.setState({
-      orientation: Platform.isPortrait() ? 'portrait' : 'landscape',
-      deviceType: Platform.isTablet() ? 'tablet' : 'phone',
-    });
+    this.setState(
+      {
+        orientation: Device.isPortrait() ? 'portrait' : 'landscape',
+        deviceType: Device.isTablet() ? 'tablet' : 'phone',
+      },
+      () => {
+        this.setColorScheme();
+        this.setState({ isMounted: true });
+      },
+    );
   };
 
   reset = () => {
     this.setState(
       {
-        orientation: Platform.isPortrait() ? 'portrait' : 'landscape',
+        orientation: Device.isPortrait() ? 'portrait' : 'landscape',
       },
       this.handleRowTouch(),
     );
-  };
-
-  getProportions = () => {
-    return {
-      open:
-        CONTAINER_FLEX_SIZE *
-        (this.state.deviceType === 'phone' ? 0.815 : 0.915),
-      closed:
-        CONTAINER_FLEX_SIZE *
-        (this.state.deviceType === 'phone' ? 0.185 : 0.085),
-    };
   };
 
   about = () =>
@@ -108,30 +109,76 @@ class App extends React.Component {
       },
     );
 
+  getRows = () => {
+    const { colorScheme } = this.state;
+
+    return {
+      g: {
+        component: <G as={Letter} color={colorSchemes[colorScheme].black} />,
+        backgroundColor: colorSchemes[colorScheme].cyan,
+      },
+      n: {
+        component: <N as={Letter} color={colorSchemes[colorScheme].cyan} />,
+        backgroundColor: colorSchemes[colorScheme].magenta,
+      },
+      l: {
+        component: <L as={Letter} color={colorSchemes[colorScheme].magenta} />,
+        backgroundColor: colorSchemes[colorScheme].yellow,
+      },
+      c: {
+        component: <C as={Letter} color={colorSchemes[colorScheme].yellow} />,
+        backgroundColor: colorSchemes[colorScheme].black,
+      },
+    };
+  };
+
+  getProportions = () => {
+    return {
+      open:
+        CONTAINER_FLEX_SIZE *
+        (this.state.deviceType === 'phone' ? 0.815 : 0.915),
+      closed:
+        CONTAINER_FLEX_SIZE *
+        (this.state.deviceType === 'phone' ? 0.185 : 0.085),
+    };
+  };
+
+  setColorScheme = () =>
+    this.setState({ colorScheme: Appearance.getColorScheme() });
+
+  handleAppStateChange = (nextAppState) => {
+    this.setState({ appState: nextAppState }, () => {
+      this.setColorScheme();
+    });
+  };
+
   componentDidMount() {
     this.init();
     Dimensions.addEventListener('change', () => {
       this.reset();
     });
+    AppState.addEventListener('change', this.handleAppStateChange);
   }
 
   componentWillUnmount() {
     Dimensions.removeEventListener('change');
+    AppState.removeEventListener('change', this.handleAppStateChange);
   }
 
-  handleRowTouch = (tapped = null) => {
+  handleRowTouch = (justTapped = null) => {
     this.setState(
       (prevState) => {
         return {
-          lastTapped: prevState.lastTapped === tapped ? null : tapped,
+          lastTapped: prevState.lastTapped === justTapped ? null : justTapped,
         };
       },
       () => {
-        const { lastTapped } = this.state;
-        Object.keys(this.state.tapped).map((key) => {
-          Animated.timing(this.state.tapped[key], {
+        const { lastTapped, tapped } = this.state;
+        // Animate rows.
+        Object.keys(tapped).map((key) => {
+          Animated.timing(tapped[key], {
             toValue:
-              lastTapped && key === tapped
+              lastTapped && key === justTapped
                 ? this.getProportions().open
                 : lastTapped
                 ? this.getProportions().closed
@@ -145,34 +192,23 @@ class App extends React.Component {
     );
   };
 
-  renderGradient = () => (
-    <GradientMask
-      steps={[
-        { color: colors.cyan, offset: 12.5 },
-        { color: colors.magenta, offset: 37.5 },
-        { color: colors.yellow, offset: 62.5 },
-        { color: colors.black, offset: 87.5 },
-      ]}
-    />
-  );
-
   renderRow = (key) => {
     const { orientation } = this.state;
 
     return React.createElement(
       Row,
       {
-        backgroundColor: Rows[key].backgroundColor,
+        backgroundColor: this.getRows()[key].backgroundColor,
         orientation: orientation,
         elevation: shadow.elevation,
       },
       <TouchableHighlight
-        underlayColor={Rows[key].backgroundColor}
+        underlayColor={this.getRows()[key].backgroundColor}
         onPress={() => this.handleRowTouch(key)}
         onLongPress={this.about}
-        delayLongPress={1000}
+        delayLongPress={DELAY_LONG_PRESS}
       >
-        {Rows[key].component}
+        {this.getRows()[key].component}
       </TouchableHighlight>,
     );
   };
@@ -180,7 +216,7 @@ class App extends React.Component {
   renderRows = () => {
     const { tapped } = this.state;
 
-    return Object.keys(Rows).map((key, i) => {
+    return Object.keys(this.getRows()).map((key, i) => {
       return (
         <Animated.View
           style={{
@@ -196,10 +232,25 @@ class App extends React.Component {
     });
   };
 
-  render() {
-    const { orientation } = this.state;
+  renderGradient = () => {
+    const { colorScheme } = this.state;
 
     return (
+      <GradientMask
+        steps={[
+          { color: colorSchemes[colorScheme].cyan, offset: 12.5 },
+          { color: colorSchemes[colorScheme].magenta, offset: 37.5 },
+          { color: colorSchemes[colorScheme].yellow, offset: 62.5 },
+          { color: colorSchemes[colorScheme].black, offset: 87.5 },
+        ]}
+      />
+    );
+  };
+
+  render() {
+    const { orientation, isMounted } = this.state;
+
+    return isMounted ? (
       <React.Fragment>
         <StatusBar hidden />
         {this.renderGradient()}
@@ -211,7 +262,7 @@ class App extends React.Component {
           {this.renderRows()}
         </Container>
       </React.Fragment>
-    );
+    ) : null;
   }
 }
 

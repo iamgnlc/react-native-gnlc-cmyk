@@ -2,11 +2,19 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 
-export const colors = {
-  black: '#010202',
-  cyan: '#29AAE2',
-  magenta: '#E32185',
-  yellow: '#FAEA26',
+export const colorSchemes = {
+  dark: {
+    black: '#010202',
+    cyan: '#29AAE2',
+    magenta: '#E32185',
+    yellow: '#FAEA26',
+  },
+  light: {
+    black: '#1a1b1b',
+    cyan: '#88D4F8',
+    magenta: '#F884E8',
+    yellow: '#FFFFBF',
+  },
 };
 
 export const shadow = {
@@ -21,6 +29,7 @@ export const shadow = {
   elevation: 8,
 };
 
+// Gradient.
 export const GradientWrapper = styled.View`
   position: absolute;
   top: 0;
@@ -30,10 +39,7 @@ export const GradientWrapper = styled.View`
   z-index: 0;
 `;
 
-export const SvgWrapper = styled.View`
-  aspect-ratio: 1;
-`;
-
+// Container.
 export const Container = styled(Animated.View)`
   background-color: transparent;
   display: flex;
@@ -43,6 +49,7 @@ export const Container = styled(Animated.View)`
   align-items: stretch;
   justify-content: center;
   z-index: 1;
+  height: 100%;
 `;
 
 Container.propTypes = {
@@ -50,6 +57,7 @@ Container.propTypes = {
   orientation: PropTypes.string,
 };
 
+// Row.
 export const Row = styled.View`
   background-color: ${(props) => props.backgroundColor};
   flex: 1;
@@ -63,5 +71,10 @@ Row.propTypes = {
   backgroundColor: PropTypes.string,
   orientation: PropTypes.string,
 };
+
+// Svg.
+export const SvgWrapper = styled.View`
+  aspect-ratio: 1;
+`;
 
 export const Letter = styled.View``;

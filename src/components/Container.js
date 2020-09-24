@@ -7,7 +7,7 @@ import { Container as StyledContainer } from '../styles/Styles';
 const Container = (props) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  React.useEffect(() => {
+  useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
       duration: props.duration || 1000,
