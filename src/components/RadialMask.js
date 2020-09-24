@@ -36,9 +36,9 @@ const RadialMask = (props) => {
             fy="50%"
             gradientUnits="userSpaceOnUse"
           >
-            <Stop offset="0" stopColor={getColors().color} stopOpacity={0} />
+            <Stop offset={0} stopColor={getColors().color} stopOpacity={0} />
             <Stop
-              offset="1"
+              offset={1}
               stopColor={getColors().color}
               stopOpacity={getColors().opacity}
             />

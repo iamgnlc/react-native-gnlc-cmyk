@@ -29,9 +29,9 @@ import N from './assets/N';
 import L from './assets/L';
 import C from './assets/C';
 
+import Container from './components/Container';
 import GradientBackground from './components/GradientBackground';
 import RadialMask from './components/RadialMask';
-import Container from './components/Container';
 
 class App extends React.Component {
   state = {
@@ -118,13 +118,11 @@ class App extends React.Component {
   };
 
   getProportions = () => {
+    const { deviceType } = this.state;
+
     return {
-      open:
-        CONTAINER_FLEX_SIZE *
-        (this.state.deviceType === 'phone' ? 0.815 : 0.915),
-      closed:
-        CONTAINER_FLEX_SIZE *
-        (this.state.deviceType === 'phone' ? 0.185 : 0.085),
+      open: CONTAINER_FLEX_SIZE * (deviceType === 'phone' ? 0.815 : 0.915),
+      closed: CONTAINER_FLEX_SIZE * (deviceType === 'phone' ? 0.185 : 0.085),
     };
   };
 
@@ -229,23 +227,41 @@ class App extends React.Component {
     );
   };
 
-  render() {
-    const { orientation, isMounted, colorScheme } = this.state;
+  renderContainer = () => {
+    const { orientation } = this.state;
 
-    return isMounted ? (
-      <React.Fragment>
+    return (
+      <Container
+        orientation={orientation}
+        flex={CONTAINER_FLEX_SIZE}
+        duration={FADE_DURATION}
+      >
+        {this.renderRows()}
+      </Container>
+    );
+  };
+
+  renderMask = () => {
+    const { colorScheme } = this.state;
+
+    return <RadialMask colorScheme={colorScheme} />;
+  };
+
+  render() {
+    const { isMounted } = this.state;
+
+    return (
+      <>
         <StatusBar hidden />
-        {this.renderBackground()}
-        <Container
-          orientation={orientation}
-          flex={CONTAINER_FLEX_SIZE}
-          duration={FADE_DURATION}
-        >
-          {this.renderRows()}
-        </Container>
-        <RadialMask colorScheme={colorScheme} />
-      </React.Fragment>
-    ) : null;
+        {isMounted && (
+          <>
+            {this.renderBackground()}
+            {this.renderContainer()}
+            {this.renderMask()}
+          </>
+        )}
+      </>
+    );
   }
 }
 
