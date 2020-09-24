@@ -29,27 +29,9 @@ import N from './assets/N';
 import L from './assets/L';
 import C from './assets/C';
 
-import GradientMask from './components/GradientMask';
+import GradientBackground from './components/GradientBackground';
+import RadialMask from './components/RadialMask';
 import Container from './components/Container';
-
-// const Rows = {
-//   g: {
-//     component: <G as={Letter} color={colors.black} />,
-//     backgroundColor: colors.cyan,
-//   },
-//   n: {
-//     component: <N as={Letter} color={colors.cyan} />,
-//     backgroundColor: colors.magenta,
-//   },
-//   l: {
-//     component: <L as={Letter} color={colors.magenta} />,
-//     backgroundColor: colors.yellow,
-//   },
-//   c: {
-//     component: <C as={Letter} color={colors.yellow} />,
-//     backgroundColor: colors.black,
-//   },
-// };
 
 class App extends React.Component {
   state = {
@@ -67,27 +49,30 @@ class App extends React.Component {
     },
   };
 
-  init = () => {
-    this.setState(
-      {
-        orientation: Device.isPortrait() ? 'portrait' : 'landscape',
-        deviceType: Device.isTablet() ? 'tablet' : 'phone',
-      },
-      () => {
-        this.setColorScheme();
-        this.setState({ isMounted: true });
-      },
-    );
+  init = async () => {
+    await this.setColorScheme();
+    this.setDeviceType();
+    this.setOrientation();
+    this.setState({ isMounted: true });
   };
 
   reset = () => {
-    this.setState(
-      {
-        orientation: Device.isPortrait() ? 'portrait' : 'landscape',
-      },
-      this.handleRowTouch(),
-    );
+    this.setOrientation();
+    this.handleRowTouch();
   };
+
+  setDeviceType = () =>
+    this.setState({
+      deviceType: Device.isTablet() ? 'tablet' : 'phone',
+    });
+
+  setOrientation = () =>
+    this.setState({
+      orientation: Device.isPortrait() ? 'portrait' : 'landscape',
+    });
+
+  setColorScheme = async () =>
+    this.setState({ colorScheme: Appearance.getColorScheme() });
 
   about = () =>
     Alert.alert(
@@ -143,27 +128,11 @@ class App extends React.Component {
     };
   };
 
-  setColorScheme = () =>
-    this.setState({ colorScheme: Appearance.getColorScheme() });
-
   handleAppStateChange = (nextAppState) => {
-    this.setState({ appState: nextAppState }, () => {
-      this.setColorScheme();
+    this.setState({ appState: nextAppState }, async () => {
+      await this.setColorScheme();
     });
   };
-
-  componentDidMount() {
-    this.init();
-    Dimensions.addEventListener('change', () => {
-      this.reset();
-    });
-    AppState.addEventListener('change', this.handleAppStateChange);
-  }
-
-  componentWillUnmount() {
-    Dimensions.removeEventListener('change');
-    AppState.removeEventListener('change', this.handleAppStateChange);
-  }
 
   handleRowTouch = (justTapped = null) => {
     this.setState(
@@ -191,6 +160,19 @@ class App extends React.Component {
       },
     );
   };
+
+  componentDidMount() {
+    this.init();
+    Dimensions.addEventListener('change', () => {
+      this.reset();
+    });
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    Dimensions.removeEventListener('change');
+    AppState.removeEventListener('change', this.handleAppStateChange);
+  }
 
   renderRow = (key) => {
     const { orientation } = this.state;
@@ -232,11 +214,11 @@ class App extends React.Component {
     });
   };
 
-  renderGradient = () => {
+  renderBackground = () => {
     const { colorScheme } = this.state;
 
     return (
-      <GradientMask
+      <GradientBackground
         steps={[
           { color: colorSchemes[colorScheme].cyan, offset: 12.5 },
           { color: colorSchemes[colorScheme].magenta, offset: 37.5 },
@@ -248,12 +230,12 @@ class App extends React.Component {
   };
 
   render() {
-    const { orientation, isMounted } = this.state;
+    const { orientation, isMounted, colorScheme } = this.state;
 
     return isMounted ? (
       <React.Fragment>
         <StatusBar hidden />
-        {this.renderGradient()}
+        {this.renderBackground()}
         <Container
           orientation={orientation}
           flex={CONTAINER_FLEX_SIZE}
@@ -261,6 +243,7 @@ class App extends React.Component {
         >
           {this.renderRows()}
         </Container>
+        <RadialMask colorScheme={colorScheme} />
       </React.Fragment>
     ) : null;
   }

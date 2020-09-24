@@ -5,15 +5,15 @@ import { Animated } from 'react-native';
 export const colorSchemes = {
   dark: {
     black: '#010202',
+    cyan: '#38b0e4',
+    magenta: '#e5308d',
+    yellow: '#faec37',
+  },
+  light: {
+    black: '#010202',
     cyan: '#29AAE2',
     magenta: '#E32185',
     yellow: '#FAEA26',
-  },
-  light: {
-    black: '#1a1b1b',
-    cyan: '#88D4F8',
-    magenta: '#F884E8',
-    yellow: '#FFFFBF',
   },
 };
 
@@ -36,8 +36,16 @@ export const GradientWrapper = styled.View`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 0;
+  z-index: ${(props) => props.zIndex};
 `;
+
+GradientWrapper.defaultProps = {
+  zIndex: 0,
+};
+
+GradientWrapper.propTypes = {
+  zIndex: PropTypes.number,
+};
 
 // Container.
 export const Container = styled(Animated.View)`

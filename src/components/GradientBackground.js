@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { GradientWrapper } from '../styles/Styles';
 
 const GradientMask = (props) => (
-  <GradientWrapper>
+  <GradientWrapper pointerEvents="none">
     <Svg height="100%" width="100%">
       <Defs>
         <LinearGradient id="gradient" x1="0" y1="0" x2="0" y2="100%">
