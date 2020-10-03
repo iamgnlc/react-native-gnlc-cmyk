@@ -47,13 +47,13 @@ GradientWrapper.propTypes = {
 export const Container = styled(Animated.View)`
   background-color: transparent;
   display: flex;
-  flex: ${(props) => props.flex};
-  flex-direction: ${(props) =>
-    props.orientation === 'landscape' ? 'row' : 'column'};
   align-items: stretch;
   justify-content: center;
   z-index: 1;
   height: 100%;
+  flex: ${(props) => props.flex};
+  flex-direction: ${(props) =>
+    props.orientation === 'landscape' ? 'row' : 'column'};
 `;
 
 Container.propTypes = {
@@ -63,12 +63,12 @@ Container.propTypes = {
 
 // Row.
 export const Row = styled.View`
-  background-color: ${(props) => props.backgroundColor};
   flex: 1;
   overflow: hidden;
+  justify-content: center;
+  background-color: ${(props) => props.backgroundColor};
   align-items: ${(props) =>
     props.orientation === 'landscape' ? 'center' : 'stretch'};
-  justify-content: center;
 `;
 
 Row.propTypes = {

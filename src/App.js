@@ -70,7 +70,9 @@ class App extends React.Component {
     });
 
   setColorScheme = async () =>
-    this.setState({ colorScheme: Appearance.getColorScheme() });
+    new Promise((resolve) => {
+      this.setState({ colorScheme: Appearance.getColorScheme() }, resolve);
+    });
 
   getRows = () => {
     const { colorScheme } = this.state;
@@ -152,21 +154,22 @@ class App extends React.Component {
 
   renderRow = (key) => {
     const { orientation } = this.state;
+    const { backgroundColor, component } = this.getRows()[key];
 
     return React.createElement(
       Row,
       {
-        backgroundColor: this.getRows()[key].backgroundColor,
-        orientation: orientation,
+        backgroundColor,
+        orientation,
         elevation: shadow.elevation,
       },
       <TouchableHighlight
-        underlayColor={this.getRows()[key].backgroundColor}
+        underlayColor={backgroundColor}
         onPress={() => this.handleRowTouch(key)}
         onLongPress={about}
         delayLongPress={DELAY_LONG_PRESS}
       >
-        {this.getRows()[key].component}
+        {component}
       </TouchableHighlight>,
     );
   };
