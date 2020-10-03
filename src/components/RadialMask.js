@@ -7,7 +7,8 @@ import { GradientWrapper } from '../styles/Styles';
 
 const RadialMask = (props) => {
   function getDimensions() {
-    return ({ width, height } = Dimensions.get('window'));
+    const { width, height } = Dimensions.get('window');
+    return { width, height };
   }
 
   function getColors() {

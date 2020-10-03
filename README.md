@@ -2,6 +2,12 @@
 
 React Native demo app
 
+## Install Expo
+
+```
+$ yarn global add expo-cli
+```
+
 ## Install dependencies
 
 ```
@@ -26,3 +32,7 @@ cyan: #29AAE2
 magenta: #E32185
 yellow: #FAEA26
 ```
+
+---
+
+![](https://img.shields.io/badge/author-iamgnlc-blueviolet)

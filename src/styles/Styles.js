@@ -36,12 +36,8 @@ export const GradientWrapper = styled.View`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: ${(props) => props.zIndex};
+  z-index: ${(props) => props.zIndex || 0};
 `;
-
-GradientWrapper.defaultProps = {
-  zIndex: 0,
-};
 
 GradientWrapper.propTypes = {
   zIndex: PropTypes.number,

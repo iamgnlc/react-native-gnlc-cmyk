@@ -1,11 +1,9 @@
 import React from 'react';
 import {
-  Alert,
   Animated,
   Appearance,
   AppState,
   Dimensions,
-  Linking,
   StatusBar,
   TouchableHighlight,
 } from 'react-native';
@@ -16,7 +14,6 @@ import {
   DELAY_LONG_PRESS,
   EASE_TYPE,
   FADE_DURATION,
-  GITHUB_PROFILE,
   ROW_FLEX_SIZE,
 } from './config';
 
@@ -29,6 +26,7 @@ import N from './assets/N';
 import L from './assets/L';
 import C from './assets/C';
 
+import about from './components/about';
 import Container from './components/Container';
 import GradientBackground from './components/GradientBackground';
 import RadialMask from './components/RadialMask';
@@ -73,26 +71,6 @@ class App extends React.Component {
 
   setColorScheme = async () =>
     this.setState({ colorScheme: Appearance.getColorScheme() });
-
-  about = () =>
-    Alert.alert(
-      'About',
-      GITHUB_PROFILE,
-      [
-        {
-          text: 'OK',
-        },
-        {
-          text: 'Open',
-          onPress: () => {
-            Linking.openURL(GITHUB_PROFILE);
-          },
-        },
-      ],
-      {
-        cancelable: false,
-      },
-    );
 
   getRows = () => {
     const { colorScheme } = this.state;
@@ -185,7 +163,7 @@ class App extends React.Component {
       <TouchableHighlight
         underlayColor={this.getRows()[key].backgroundColor}
         onPress={() => this.handleRowTouch(key)}
-        onLongPress={this.about}
+        onLongPress={about}
         delayLongPress={DELAY_LONG_PRESS}
       >
         {this.getRows()[key].component}
