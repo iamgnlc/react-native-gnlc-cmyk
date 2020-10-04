@@ -13,8 +13,8 @@ const RadialMask = (props) => {
 
   function getColors() {
     return props.colorScheme === 'dark'
-      ? { color: '#000', opacity: 0.35 }
-      : { color: '#fff', opacity: 0.25 };
+      ? { color: '#000', opacity: 0.25 }
+      : { color: '#fff', opacity: 0.15 };
   }
 
   const [dimensions, setDimensions] = React.useState(getDimensions());

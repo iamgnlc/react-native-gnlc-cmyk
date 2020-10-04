@@ -2,19 +2,16 @@ import styled from 'styled-components/native';
 import PropTypes from 'prop-types';
 import { Animated } from 'react-native';
 
+export const palette = {
+  black: '#010202',
+  cyan: '#29AAE2',
+  magenta: '#E32185',
+  yellow: '#FAEA26',
+};
+
 export const colorSchemes = {
-  dark: {
-    black: '#010202',
-    cyan: '#38b0e4',
-    magenta: '#e5308d',
-    yellow: '#faec37',
-  },
-  light: {
-    black: '#010202',
-    cyan: '#29AAE2',
-    magenta: '#E32185',
-    yellow: '#FAEA26',
-  },
+  dark: palette,
+  light: palette,
 };
 
 export const shadow = {

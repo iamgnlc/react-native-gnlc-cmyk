@@ -7,6 +7,7 @@
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "icon": "./src/assets/icon.png",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./src/assets/splash.png",
       "backgroundColor": "#000000"

@@ -1,5 +1,7 @@
 # react-native-gnlc-cmyk
 
+![last commit](https://img.shields.io/github/last-commit/iamgnlc/react-native-gnlc-cmyk)
+
 React Native demo app
 
 ## Install Expo
@@ -35,4 +37,4 @@ yellow: #FAEA26
 
 ---
 
-![](https://img.shields.io/badge/author-iamgnlc-blueviolet)
+[![](https://img.shields.io/badge/author-iamgnlc-blueviolet)](https://github.com/iamgnlc)

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Animated,
-  Appearance,
   AppState,
   Dimensions,
   StatusBar,
   TouchableHighlight,
 } from 'react-native';
+import { Appearance, AppearanceProvider } from 'react-native-appearance';
 
 import {
   ANIMATION_DURATION,
@@ -107,9 +107,7 @@ class App extends React.Component {
   };
 
   handleAppStateChange = (nextAppState) => {
-    this.setState({ appState: nextAppState }, async () => {
-      await this.setColorScheme();
-    });
+    this.setState({ appState: nextAppState });
   };
 
   handleRowTouch = (justTapped = null) => {
@@ -141,15 +139,15 @@ class App extends React.Component {
 
   componentDidMount() {
     this.init();
-    Dimensions.addEventListener('change', () => {
-      this.reset();
-    });
+    Dimensions.addEventListener('change', this.reset);
     AppState.addEventListener('change', this.handleAppStateChange);
+    Appearance.addChangeListener(this.setColorScheme);
   }
 
   componentWillUnmount() {
     Dimensions.removeEventListener('change');
-    AppState.removeEventListener('change', this.handleAppStateChange);
+    AppState.removeEventListener('change');
+    Appearance.removeChangeListener();
   }
 
   renderRow = (key) => {
@@ -246,4 +244,8 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default () => (
+  <AppearanceProvider>
+    <App />
+  </AppearanceProvider>
+);
