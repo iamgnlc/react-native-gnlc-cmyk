@@ -1,16 +1,12 @@
 import * as React from 'react';
 import { Svg, Defs, RadialGradient, Stop, Rect } from 'react-native-svg';
-import { Dimensions } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { GradientWrapper } from '../styles/Styles';
 
-const RadialMask = (props) => {
-  function getDimensions() {
-    const { width, height } = Dimensions.get('window');
-    return { width, height };
-  }
+import getDimensions from '../utils/getDimensions';
 
+const RadialMask = (props) => {
   function getColors() {
     return props.colorScheme === 'dark'
       ? { color: '#000', opacity: 0.25 }
@@ -63,4 +59,4 @@ RadialMask.propTypes = {
   colorScheme: PropTypes.string.isRequired,
 };
 
-export default RadialMask;
+export default React.memo(RadialMask);
