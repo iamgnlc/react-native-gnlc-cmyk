@@ -1,4 +1,11 @@
 {
+  "name": "react-native-gnlc-cmyk",
+  "version": "1.0.0",
+  "author": {
+    "name": "GNLC",
+    "url": "https://github.com/iamgnlc"
+  },
+  "license": "MIT",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -8,15 +15,15 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^39.0.3",
-    "expo-sensors": "~9.1.0",
-    "react": "16.13.1",
-    "react-dom": "^16.13.1",
-    "react-native": "0.63.3",
+    "expo": "^40.0.1",
+    "expo-sensors": "~9.2.0",
+    "react": "17.0.1",
+    "react-dom": "^17.0.1",
+    "react-native": "0.63.4",
     "react-native-appearance": "~0.3.3",
     "react-native-svg": "12.1.0",
     "react-native-web": "^0.13.14",
-    "styled-components": "^5.2.0"
+    "styled-components": "^5.2.1"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.3.0"
