@@ -3,7 +3,7 @@
     "name": "GNLC CMYK",
     "slug": "react-native-gnlc-cmyk",
     "privacy": "public",
-    "sdkVersion": "40.0.0",
+    "sdkVersion": "42.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "icon": "./src/assets/icon.png",
