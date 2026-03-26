@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Animated,
+  Appearance,
   AppState,
   Dimensions,
   StatusBar,
   TouchableHighlight,
 } from 'react-native';
-import { Appearance, AppearanceProvider } from 'react-native-appearance';
 
 import {
   ANIMATION_DURATION,
@@ -119,16 +119,17 @@ class App extends React.Component {
       },
       () => {
         const { lastTapped, tapped } = this.state;
+        const proportions = this.getProportions();
         // Animate rows.
-        Object.keys(tapped).map((key) => {
+        Object.keys(tapped).forEach((key) => {
           Animated.timing(tapped[key], {
             toValue:
               lastTapped && key === justTapped
-                ? this.getProportions().open
+                ? proportions.open
                 : lastTapped
-                ? this.getProportions().closed
+                ? proportions.closed
                 : ROW_FLEX_SIZE,
-            animation: ANIMATION_DURATION,
+            duration: ANIMATION_DURATION,
             easing: EASE_TYPE,
             useNativeDriver: false,
           }).start();
@@ -139,15 +140,19 @@ class App extends React.Component {
 
   componentDidMount() {
     this.init();
-    Dimensions.addEventListener('change', this.reset);
-    AppState.addEventListener('change', this.handleAppStateChange);
-    Appearance.addChangeListener(this.setColorScheme);
+    this._dimensionsSubscription = Dimensions.addEventListener('change', this.reset);
+    this._appStateSubscription = AppState.addEventListener('change', this.handleAppStateChange);
+    this._appearanceSubscription = Appearance.addChangeListener(({ colorScheme }) => {
+      if (colorScheme !== this.state.colorScheme) {
+        this.setColorScheme();
+      }
+    });
   }
 
   componentWillUnmount() {
-    Dimensions.removeEventListener('change');
-    AppState.removeEventListener('change');
-    Appearance.removeChangeListener();
+    this._dimensionsSubscription?.remove();
+    this._appStateSubscription?.remove();
+    this._appearanceSubscription?.remove();
   }
 
   renderRow = (key) => {
@@ -244,8 +249,4 @@ class App extends React.Component {
   }
 }
 
-export default () => (
-  <AppearanceProvider>
-    <App />
-  </AppearanceProvider>
-);
+export default App;

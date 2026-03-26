@@ -11,7 +11,7 @@ const openProfile = () => {
     .catch((err) => console.error('An error occurred', err));
 };
 
-export default about = () =>
+export default () =>
   Alert.alert(
     'About',
     `https:${GITHUB_PROFILE}`,

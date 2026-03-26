@@ -6,27 +6,27 @@
     "url": "https://github.com/iamgnlc"
   },
   "license": "MIT",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "expo/AppEntry",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web",
-    "eject": "expo eject"
+    "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "^42.0.0",
-    "expo-sensors": "~10.2.2",
-    "react": "17.0.2",
-    "react-dom": "^17.0.2",
-    "react-native": "0.63.2",
-    "react-native-appearance": "~0.3.4",
-    "react-native-svg": "12.1.1",
-    "react-native-web": "^0.17.1",
-    "styled-components": "^5.3.0"
+    "expo": "~55.0.8",
+    "expo-sensors": "~55.0.9",
+    "expo-updates": "~55.0.15",
+    "prop-types": "^15.8.1",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-native": "0.83.2",
+    "react-native-svg": "15.15.3",
+    "react-native-web": "^0.21.0",
+    "styled-components": "^6.1.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^8.4.0"
+    "babel-preset-expo": "~55.0.12"
   },
   "private": true
 }

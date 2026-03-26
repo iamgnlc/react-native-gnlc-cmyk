@@ -2,9 +2,10 @@
   "expo": {
     "name": "GNLC CMYK",
     "slug": "react-native-gnlc-cmyk",
-    "privacy": "public",
-    "sdkVersion": "42.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android"
+    ],
     "version": "1.0.0",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "automatic",
@@ -12,10 +13,9 @@
       "image": "./src/assets/splash.png",
       "backgroundColor": "#000000"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "requireFullScreen": true,
@@ -25,6 +25,18 @@
     "android": {
       "package": "me.gnlc.cmyk",
       "versionCode": 1
+    },
+    "extra": {
+      "eas": {
+        "projectId": "869f35c4-4db0-49f7-9cc4-6c9366d2fc03"
+      }
+    },
+    "owner": "gnlc",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/869f35c4-4db0-49f7-9cc4-6c9366d2fc03"
     }
   }
 }
