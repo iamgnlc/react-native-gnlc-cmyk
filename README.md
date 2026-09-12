@@ -8,27 +8,33 @@ React Native demo app
 
 ## Install Expo
 
-```
-$ yarn global add expo-cli
+```sh
+yarn global add expo-cli
 ```
 
 ## Install dependencies
 
-```
-$ yarn install
+```sh
+yarn install
 ```
 
 ## Run in simulator
 
+```sh
+yarn ios
+
+yarn android
+
+yarn web
 ```
-$ yarn ios
 
-$ yarn android
+## Deploy on Expo.dev
 
-$ yarn web
+```sh
+eas update --branch main -m "deploy"
 ```
 
-### Palette
+## Palette
 
 ```
 black: #010202

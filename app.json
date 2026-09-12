@@ -9,10 +9,6 @@
     "version": "1.0.0",
     "icon": "./src/assets/icon.png",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./src/assets/splash.png",
-      "backgroundColor": "#000000"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -26,17 +22,30 @@
       "package": "me.gnlc.cmyk",
       "versionCode": 1
     },
+    "owner": "gnlc",
     "extra": {
       "eas": {
-        "projectId": "869f35c4-4db0-49f7-9cc4-6c9366d2fc03"
+        "projectId": "7b2217bf-e761-4eab-bac8-5d3478cd336b"
       }
     },
-    "owner": "gnlc",
     "runtimeVersion": {
-      "policy": "appVersion"
+      "policy": "sdkVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/869f35c4-4db0-49f7-9cc4-6c9366d2fc03"
-    }
+      "url": "https://u.expo.dev/7b2217bf-e761-4eab-bac8-5d3478cd336b",
+      "requestHeaders": {
+        "expo-channel-name": "default"
+      }
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./src/assets/splash.png",
+          "resizeMode": "cover",
+          "backgroundColor": "#000000"
+        }
+      ]
+    ]
   }
 }
