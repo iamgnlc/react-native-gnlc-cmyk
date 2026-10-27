@@ -14,20 +14,20 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~57.0.22",
-    "expo-sensors": "~57.0.3",
-    "expo-splash-screen": "~57.0.9",
-    "expo-updates": "~57.0.22",
+    "expo": "^58.0.19",
+    "expo-sensors": "~58.0.4",
+    "expo-splash-screen": "~58.0.11",
+    "expo-updates": "~58.0.18",
     "prop-types": "^15.8.1",
-    "react": "19.2.3",
-    "react-dom": "19.2.3",
-    "react-native": "0.86.3",
-    "react-native-svg": "15.15.4",
-    "react-native-web": "^0.21.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "react-native": "0.88.0",
+    "react-native-svg": "15.16.0",
+    "react-native-web": "^0.21.4",
     "styled-components": "^6.1.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "~57.0.0"
+    "babel-preset-expo": "~58.0.0"
   },
   "private": true
 }
